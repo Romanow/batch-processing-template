@@ -1,0 +1,48 @@
+plugins {
+    id "java"
+    id "idea"
+    id "org.springframework.boot" version "2.3.0.RELEASE"
+    id "io.spring.dependency-management" version "1.0.10.RELEASE"
+}
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+ext {
+    mysqlVersion = "8.0.16"
+    guavaVersion = "27.1-jre"
+    lombokVersion = "1.18.4"
+    findBugsVersion = "3.0.1"
+    junitVersion = "5.3.0"
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-batch"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-logging"
+
+    implementation "mysql:mysql-connector-java:${mysqlVersion}"
+
+    implementation "com.google.guava:guava:${guavaVersion}"
+    implementation "com.google.code.gson:gson"
+    implementation "org.apache.commons:commons-lang3"
+
+    implementation "com.google.code.findbugs:annotations:${findBugsVersion}"
+    implementation "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
+
+bootJar {
+    archiveFileName = "${project.name}.jar"
+}
